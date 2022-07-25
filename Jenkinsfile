@@ -5,24 +5,20 @@ pipeline {
       	
 	stage ('Build') {
 	   steps {
-	      echo '********* Test Stage Started **********'
 	      sh 'pyb clean analyze verify coverage'
-	      echo '********* Test Stage Finished **********'
            }
        	}
 	stage('SonarQube Analysis') {
 	    environment {
 		scannerHome = tool 'SonarQube Scanner'
 	    }
-	    steps {
-		echo '********* Test Stage Started **********'				
+	    steps {				
 		withSonarQubeEnv('admin') {
 			sh '${scannerHome}/bin/sonar-scanner \
 			-D sonar.projectKey=pybuilder \
 			-D sonar.python.coverage.reportPaths=/target/reports/*.xml \
 			-D sonar.python.xunit.reportPaths=/target/reports/*.xml'
 		}
-		echo '********* Test Stage Finished **********'
             }
 	}
         stage ('Generate Test Reports') {
@@ -32,11 +28,9 @@ pipeline {
         }
 	stage ('Publish Artifactory') {
 	    steps {
-		echo '********* Publish Report to JFrog Artifacts **********' 
 		withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'passwd', usernameVariable: 'user')]) {
 			sh 'jf rt upload target/dist/sampledevopsproject-1.0/dist/sampledevopsproject-1.0.tar.gz pythonapplication/'
-		}
-		echo '********* Publish Report Finished **********'	
+		}	
 	    }
 	}
     }
