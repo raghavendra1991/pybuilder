@@ -6,7 +6,7 @@ pipeline {
 	stage ('Build') {
 	   steps {
 	      echo '********* Test Stage Started **********'
-	      sh 'pyb clean analyze verify'
+	      sh 'pyb clean analyze verify coverage'
 	      echo '********* Test Stage Finished **********'
            }
        	}
@@ -18,8 +18,7 @@ pipeline {
 		echo '********* Test Stage Started **********'				
 		withSonarQubeEnv('admin') {
 			sh '${scannerHome}/bin/sonar-scanner \
-			-D sonar.projectKey=pybuilder \
-			-Dsonar.python.coverage.reportPaths=coverage.xml'
+			-D sonar.projectKey=pybuilder'
 		}
 		echo '********* Test Stage Finished **********'
             }
