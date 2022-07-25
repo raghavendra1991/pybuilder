@@ -34,7 +34,7 @@ pipeline {
 	    steps {
 		echo '********* Publish Report to JFrog Artifacts **********' 
 		withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'passwd', usernameVariable: 'user')]) {
-			sh 'jf rt upload target/dist/sampledevopsproject-1.0/dis/sampledevopsproject-1.0.tar.gz python/'
+			sh 'jf rt upload target/dist/sampledevopsproject-1.0/dist/sampledevopsproject-1.0.tar.gz python/'
 		}
 		echo '********* Publish Report Finished **********'	
 	    }
