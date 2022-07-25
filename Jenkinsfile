@@ -3,7 +3,14 @@ pipeline {
     agent any
     stages {
       	
-       stage('SonarQube Analysis') {
+	stage ('Build') {
+	   steps {
+	      echo '********* Test Stage Started **********'
+	      sh 'pyb clean analyze verify'
+	      echo '********* Test Stage Finished **********'
+           }
+       	}
+	stage('SonarQube Analysis') {
 	    environment {
 		scannerHome = tool 'SonarQube Scanner'
 	    }
@@ -17,13 +24,6 @@ pipeline {
 		echo '********* Test Stage Finished **********'
             }
 	}
-	stage ('Build & Test') {
-	   steps {
-	      echo '********* Test Stage Started **********'
-	      sh 'pyb clean analyze verify'
-	      echo '********* Test Stage Finished **********'
-           }
-       	}
         stage ('Generate Test Reports') {
             steps {
                 sh 'pyb publish'       
