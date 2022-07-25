@@ -2,13 +2,6 @@
 pipeline {
     agent any
     stages {
-       stage ('Clean Reports') {
-            steps {
-		echo '********* Cleaning Workspace Stage Started **********'
-                sh 'rm -rf test-reports || true'  
-		echo '********* Cleaning Workspace Stage Finished **********'
-            }
-       }
        stage ('Build & Test') {
 	   steps {
 	      echo '********* Test Stage Started **********'
