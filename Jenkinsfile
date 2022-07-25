@@ -18,7 +18,8 @@ pipeline {
 		echo '********* Test Stage Started **********'				
 		withSonarQubeEnv('admin') {
 			sh '${scannerHome}/bin/sonar-scanner \
-			-D sonar.projectKey=pybuilder'
+			-D sonar.projectKey=pybuilder \
+			-D sonar.python.coverage.reportPaths=target/reports/*.xml'
 		}
 		echo '********* Test Stage Finished **********'
             }
