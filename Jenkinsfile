@@ -16,8 +16,7 @@ pipeline {
 		withSonarQubeEnv('admin') {
 			sh '${scannerHome}/bin/sonar-scanner \
 			-D sonar.projectKey=pybuilder \
-			-D sonar.python.coverage.reportPaths=/target/reports/*.xml \
-			-D sonar.python.xunit.reportPaths=/target/reports/*.xml'
+			-D sonar.python.coverage.reportPaths=/target/reports/*.xml'
 		}
             }
 	}
