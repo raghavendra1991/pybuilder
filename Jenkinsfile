@@ -5,7 +5,7 @@ pipeline {
       	
 	stage ('Build') {
 	   steps {
-	      sh 'pyb clean analyze verify coverage'
+	      sh 'pyb init clean analyze verify coverage'
            }
        	}
 	stage('SonarQube Analysis') {
